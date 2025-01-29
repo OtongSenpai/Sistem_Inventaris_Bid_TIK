@@ -23,6 +23,9 @@
                 <li>
                     <a href="index.php?page=formpeminjaman"><i class="fa fa-angle-right fa-fw"></i>Pinjam Barang</a>
                 </li>
+                <li>
+                    <a href="index.php?page=peminjaman"><i class="fa fa-angle-right fa-fw"></i>Data Peminjaman Barang</a>
+                </li>
             </ul>
             <!-- /.nav-second-level -->
         </li>

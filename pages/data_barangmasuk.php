@@ -48,7 +48,7 @@
                         <td><?=$row['kategori']?></td>
                         <td><?=$row['jumlah_masuk']?></td>
                         <td><?=$row['jenis_brg']?></td>
-                        <td><?=$row['tgl_masuk']?></td>
+                        <td><?=date("d-m-Y", strtotime($row['tgl_masuk']))?></td>
                         <td><?=$row['nama_supplier']?></td>
                       </tr>
     <?php } 

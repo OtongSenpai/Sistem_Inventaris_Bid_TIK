@@ -83,7 +83,7 @@ class Class_Barang
     {
          include("config.php");
 
-        $sql = "select * from tbl_pinjam order by tgl_pinjam DESC";
+        $sql = "select * from tbl_pinjam";
 
         $data = mysqli_query($conn,$sql);
 

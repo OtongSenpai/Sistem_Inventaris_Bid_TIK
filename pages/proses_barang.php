@@ -39,7 +39,7 @@ else if($aksi == "tambahbarangmasuk"){
     $nama_supplier = $_POST["nama_supplier"];
     $id_barangmasuk = $_POST["id_masukbarang"];
     $nama_barang = $_POST["nama_barang"];
-    $tgl = $_POST["tgl_masuk"];
+    $tgl = date('Y-m-d');
     $jumlah = $_POST["jumlah_masuk"];
 
     $kdsup = mysqli_query($conn,"select kode_supplier from tbl_supplier where nama_supplier='".$nama_supplier."'");
