@@ -13,7 +13,7 @@ class Class_User
 
         include("config.php");
 
-        $sql = "select * from tbl_user where username='".$username."' and password='".$password."'";
+        $sql = "select * from user where username='".$username."' and password='".$password."'";
         // echo $sql;
         $data = mysqli_query($conn,$sql);
 
@@ -39,7 +39,7 @@ class Class_User
 
         include("config.php");
 
-        $sql = "select * from tbl_user where id_user='".$id."' and password='".$password."'";
+        $sql = "select * from user where id_user='".$id."' and password='".$password."'";
 
         $data = mysqli_query($conn,$sql);
         while ($d = mysqli_fetch_assoc($data)) {
@@ -57,7 +57,7 @@ class Class_User
 
         include("config.php");
 
-        $sql = "update tbl_user set password='".$password."' where id_user='".$id."'";
+        $sql = "update user set password='".$password."' where id_user='".$id."'";
         // echo $sql;
         $data = mysqli_query($conn,$sql);
     }

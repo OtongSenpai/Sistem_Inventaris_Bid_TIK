@@ -9,7 +9,7 @@ class Class_Supplier
     {
         include("config.php");
 
-        $sql = "select * from tbl_supplier";
+        $sql = "select * from supplier";
 
         $data = mysqli_query($conn,$sql);
 
@@ -32,7 +32,7 @@ class Class_Supplier
     {
         include("config.php");
 
-        $sql = "insert into tbl_supplier values('".$kode_supplier."','".$nama_supplier."','".$alamat_supplier."','".$telp_supplier."','".$kota_supplier."')";
+        $sql = "insert into supplier values('".$kode_supplier."','".$nama_supplier."','".$alamat_supplier."','".$telp_supplier."','".$kota_supplier."')";
 
 
         $data = mysqli_query($conn,$sql);
@@ -42,7 +42,7 @@ class Class_Supplier
     {
         include("config.php");
 
-        $sql = "select * from tbl_supplier where kode_supplier='".$kode_supplier."'";
+        $sql = "select * from supplier where kode_supplier='".$kode_supplier."'";
         $data = mysqli_query($conn,$sql);   
         include("config.php");
 
@@ -58,7 +58,7 @@ class Class_Supplier
     {
         include("config.php");
 
-        $sql = "update tbl_supplier set nama_supplier='".$nama_supplier."', alamat_supplier='".$alamat_supplier."', telp_supplier='".$telp_supplier."', kota_supplier='".$kota_supplier."' where kode_supplier='".$kode_supplier."'";
+        $sql = "update supplier set nama_supplier='".$nama_supplier."', alamat_supplier='".$alamat_supplier."', telp_supplier='".$telp_supplier."', kota_supplier='".$kota_supplier."' where kode_supplier='".$kode_supplier."'";
 
         $data = mysqli_query($conn,$sql);
     }
@@ -67,7 +67,7 @@ class Class_Supplier
     {
         include("config.php");
 
-        $sql = "delete from tbl_supplier where kode_supplier = '".$kode_supplier."'";
+        $sql = "delete from supplier where kode_supplier = '".$kode_supplier."'";
 
         $data = mysqli_query($conn,$sql);
     }

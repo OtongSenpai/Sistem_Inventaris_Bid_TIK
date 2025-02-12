@@ -42,15 +42,15 @@ else if($aksi == "tambahbarangmasuk"){
     $tgl = date('Y-m-d');
     $jumlah = $_POST["jumlah_masuk"];
 
-    $kdsup = mysqli_query($conn,"select kode_supplier from tbl_supplier where nama_supplier='".$nama_supplier."'");
+    $kdsup = mysqli_query($conn,"select kode_supplier from supplier where nama_supplier='".$nama_supplier."'");
     $skode = mysqli_fetch_array($kdsup);
     $kode_supplier = $skode["kode_supplier"];
 
-    $kdbarang = mysqli_query($conn,"select kode_barang from tbl_barang where nama_barang='".$nama_barang."' ");
+    $kdbarang = mysqli_query($conn,"select kode_barang from barang where nama_barang='".$nama_barang."' ");
     $skodebrg = mysqli_fetch_array($kdbarang);
     $kode_barang = $skodebrg["kode_barang"];
 
-    $stok = mysqli_query($conn,"select * from tbl_stok where kode_barang ='".$kode_barang."' ");
+    $stok = mysqli_query($conn,"select * from stok where kode_barang ='".$kode_barang."' ");
     $tmpstok = mysqli_fetch_array($stok);
 
     $jml_barang = $tmpstok["jml_barangmasuk"];
@@ -81,14 +81,14 @@ else if($aksi == "tambahdatapinjam"){
     $keterangan = "Sedang dipinjam";
 
 
-    $kodebrg =  mysqli_query($conn,"select kode_barang, jumlah_brg from tbl_barang where nama_barang='".$nama_barang."'");
+    $kodebrg =  mysqli_query($conn,"select kode_barang, jumlah_brg from barang where nama_barang='".$nama_barang."'");
     $kd = mysqli_fetch_array($kodebrg); 
     $kode_barang = $kd["kode_barang"]; 
     $jumlah_brg = $kd["jumlah_brg"];
 
     $totalbarang = $jumlah_brg - $jumlah_pinjam;
 
-    $cekstok = mysqli_query($conn,"select jml_barangkeluar,total_barang from tbl_stok where kode_barang='".$kode_barang."'");
+    $cekstok = mysqli_query($conn,"select jml_barangkeluar,total_barang from stok where kode_barang='".$kode_barang."'");
     $cek = mysqli_fetch_array($cekstok);
     $jumlah_barangkeluar = $cek["jml_barangkeluar"];
     // $tot_stok = $cek["total_barang"];
@@ -121,7 +121,7 @@ else if($aksi == "kembalibarang"){
     $no_pinjam = $_POST["no_pinjam"];
     $status = $_POST["status"];
 
-    $query = mysqli_query($conn,"select * from tbl_pinjam a inner join tbl_barang b on a.kode_barang=b.kode_barang where a.nomor_pinjam='$no_pinjam'");
+    $query = mysqli_query($conn,"select * from barangkeluar a inner join barang b on a.kode_barang=b.kode_barang where a.nomor_pinjam='$no_pinjam'");
     $data = mysqli_fetch_array($query);
 
     $jumlah_pinjam = $data["jumlah_pinjam"];
@@ -129,7 +129,7 @@ else if($aksi == "kembalibarang"){
     $keterangan = $data["keterangan"];
     $jumlah_brg = $data["jumlah_brg"];
 
-    $query2 = mysqli_query($conn,"select * from tbl_stok where kode_barang='$kode_barang'");
+    $query2 = mysqli_query($conn,"select * from stok where kode_barang='$kode_barang'");
     $data2 = mysqli_fetch_array($query2);
     $barangkeluar = $data2["jml_barangkeluar"];
 
@@ -161,7 +161,7 @@ else if($aksi == "updatebarang")
 
     // $query = $db->update_barang($nama_barang,$spesifikasi,$lokasi,$kategori,$kondisi,$jenis,$sumber_dana,$kode_barang);
 
-    $query = mysqli_query($conn,"update tbl_barang a inner join tbl_stok e on a.kode_barang=e.kode_barang set 
+    $query = mysqli_query($conn,"update barang a inner join stok e on a.kode_barang=e.kode_barang set 
         
         a.nama_barang='".$nama_barang."',
         e.nama_barang='".$nama_barang."',
@@ -173,13 +173,13 @@ else if($aksi == "updatebarang")
         a.sumber_dana='".$sumber_dana."' where a.kode_barang='".$kode_barang."' ");
 
     // mengambil data barang keluar/masuk
-    $UPD = mysqli_query($conn,"select * from tbl_keluarbarang a inner join tbl_masukbarang b inner join tbl_pinjam c on a.kode_barang=b.kode_barang and b.kode_barang=c.kode_barang where a.kode_barang='".$kode_barang."' and  b.kode_barang='".$kode_barang."' and  c.kode_barang='".$kode_barang."' ");
+    $UPD = mysqli_query($conn,"select * from keluarbarang a inner join barangmasuk b inner join barangkeluar c on a.kode_barang=b.kode_barang and b.kode_barang=c.kode_barang where a.kode_barang='".$kode_barang."' and  b.kode_barang='".$kode_barang."' and  c.kode_barang='".$kode_barang."' ");
 
     $cek = mysqli_fetch_array($UPD);
     
     if ($query) {
         if ($cek > 0) {
-            $queryupdate  = mysqli_query($conn,"update tbl_keluarbarang a inner join tbl_masukbarang b inner join tbl_pinjam c on 
+            $queryupdate  = mysqli_query($conn,"update keluarbarang a inner join barangmasuk b inner join barangkeluar c on 
                 a.kode_barang=b.kode_barang
                 and b.kode_barang=c.kode_barang set a.nama_barang='".$nama_barang."',b.nama_barang='".$nama_barang."',c.nama_barang='".$nama_barang."' where a.kode_barang='".$kode_barang."' ");
             if ($queryupdate) {

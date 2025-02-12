@@ -9,7 +9,7 @@ class Class_Stok
     {
         include("config.php");
 
-        $sql = "select * from tbl_barang a inner join tbl_stok c on a.kode_barang=c.kode_barang";
+        $sql = "select * from barang a inner join stok c on a.kode_barang=c.kode_barang";
 
         $data = mysqli_query($conn,$sql);
 

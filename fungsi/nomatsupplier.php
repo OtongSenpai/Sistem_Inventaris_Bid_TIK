@@ -1,7 +1,7 @@
 
 <?php
   // membuat query max untuk kode barang
-  $carikode = mysqli_query($conn,"select max(kode_supplier) from tbl_supplier") or die (mysqli_error());
+  $carikode = mysqli_query($conn,"select max(kode_supplier) from supplier") or die (mysqli_error());
   // menjadikannya array
   $datakode = mysqli_fetch_array($carikode);
   // jika $datakode

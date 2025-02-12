@@ -1,7 +1,7 @@
 
 <?php
   // membuat query max untuk kode barang
-  $carikode = mysqli_query($conn,"select max(nomor_pinjam) from tbl_pinjam") or die (mysqli_error());
+  $carikode = mysqli_query($conn,"select max(nomor_pinjam) from barangkeluar") or die (mysqli_error());
   // menjadikannya array
   $datakode = mysqli_fetch_array($carikode);
   // jika $datakode

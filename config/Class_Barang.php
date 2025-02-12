@@ -13,7 +13,7 @@ class Class_Barang
     {
         include("config.php");
 
-        $sql = "select * from tbl_barang a inner join tbl_stok c on a.kode_barang=c.kode_barang";
+        $sql = "select * from barang a inner join stok c on a.kode_barang=c.kode_barang";
 
         $data = mysqli_query($conn,$sql);
 
@@ -36,7 +36,7 @@ class Class_Barang
     {
         include("config.php");
 
-        $sql = "select * from tbl_barang";
+        $sql = "select * from barang";
 
         $data = mysqli_query($conn,$sql);
 
@@ -59,7 +59,7 @@ class Class_Barang
     {
         include("config.php");
 
-        $sql = "select * from tbl_barang a inner join tbl_masukbarang b inner join tbl_stok c on a.kode_barang=b.kode_barang and a.kode_barang=c.kode_barang inner join tbl_supplier d on b.kode_supplier=d.kode_supplier ORDER BY b.tgl_masuk DESC";
+        $sql = "select * from barang a inner join barangmasuk b inner join stok c on a.kode_barang=b.kode_barang and a.kode_barang=c.kode_barang inner join supplier d on b.kode_supplier=d.kode_supplier ORDER BY b.tgl_masuk DESC";
         
         // echo $sql;
         $data = mysqli_query($conn,$sql);
@@ -83,7 +83,7 @@ class Class_Barang
     {
          include("config.php");
 
-        $sql = "select * from tbl_pinjam";
+        $sql = "select * from barangkeluar";
 
         $data = mysqli_query($conn,$sql);
 
@@ -102,28 +102,28 @@ class Class_Barang
         }
     }
 
-    function tampil_barangkeluar()
-    {
-         include("config.php");
+    // function tampil_barangkeluar()
+    // {
+    //      include("config.php");
 
-        $sql = "select * from tbl_keluarbarang";
+    //     $sql = "select * from barangkeluar";
 
-        $data = mysqli_query($conn,$sql);
+    //     $data = mysqli_query($conn,$sql);
 
-        $data1 = mysqli_num_rows($data);
-        if ($data1 == 0) {
+    //     $data1 = mysqli_num_rows($data);
+    //     if ($data1 == 0) {
 
-            echo "<div class='alert alert-danger'>Tidak ada data</div>";
-        }
-        else{
+    //         echo "<div class='alert alert-danger'>Tidak ada data</div>";
+    //     }
+    //     else{
             
-            while ($d=mysqli_fetch_assoc($data)) {
+    //         while ($d=mysqli_fetch_assoc($data)) {
 
-                $hasil[] = $d;
-            }
-            return $hasil;
-        }
-    }
+    //             $hasil[] = $d;
+    //         }
+    //         return $hasil;
+    //     }
+    // }
 
 
     // mengambil nama dan id_supplier
@@ -131,7 +131,7 @@ class Class_Barang
     {
         include("config.php");
 
-        $sql = "select * from tbl_supplier order by kode_supplier";
+        $sql = "select * from supplier order by kode_supplier";
 
         $data = mysqli_query($conn,$sql);
 
@@ -147,7 +147,7 @@ class Class_Barang
     {
         include("config.php");
 
-        $sql = "select * from tbl_barang order by kode_barang";
+        $sql = "select * from barang order by kode_barang";
 
         $data = mysqli_query($conn,$sql);
 
@@ -177,12 +177,12 @@ class Class_Barang
 
         include("config.php");
 
-        $sql1 = "insert into tbl_barang values('$kode_barang','$nama_barang','$spesifikasi','$lokasi_barang','$kategori','$stok','$kondisi','$jenis_barang','$sumber_dana')";
+        $sql1 = "insert into barang values('$kode_barang','$nama_barang','$spesifikasi','$lokasi_barang','$kategori','$stok','$kondisi','$jenis_barang','$sumber_dana')";
         // echo $sql1;
         $data1 = mysqli_query($conn,$sql1);
 
 
-        $sql2 = "insert into tbl_stok values('$kode_barang','$nama_barang','$stok','$jmlkeluar','$stok-$jmlkeluar','$keterangan')";
+        $sql2 = "insert into stok values('$kode_barang','$nama_barang','$stok','$jmlkeluar','$stok-$jmlkeluar','$keterangan')";
         // echo $sql2;
         $data2 = mysqli_query($conn,$sql2);
     }
@@ -202,17 +202,17 @@ class Class_Barang
         include("config.php");
 
         // Menyimpan barang masuk
-        $sql1 = "insert into tbl_masukbarang values('".$id_barangmasuk."','".$kode_barang."','".$nama_barang."','".$tgl."','".$jumlah."','".$kode_supplier."')";
+        $sql1 = "insert into barangmasuk values('".$id_barangmasuk."','".$kode_barang."','".$nama_barang."','".$tgl."','".$jumlah."','".$kode_supplier."')";
         // echo $sql1;
         $data1 = mysqli_query($conn,$sql1);
 
-        // update tbl_stok
-        $sql2 = "update tbl_stok set jml_barangmasuk='".$jml_barangmasuk."', total_barang='".$totalbarang."' where kode_barang='".$kode_barang."' ";
+        // update stok
+        $sql2 = "update stok set jml_barangmasuk='".$jml_barangmasuk."', total_barang='".$totalbarang."' where kode_barang='".$kode_barang."' ";
         // echo $sql2;
         $data2 = mysqli_query($conn,$sql2);
 
-        // update tbl_barang
-        $sql3 = "update tbl_barang set jumlah_brg='".$totjml_barang."' where kode_barang='".$kode_barang."'";
+        // update barang
+        $sql3 = "update barang set jumlah_brg='".$totjml_barang."' where kode_barang='".$kode_barang."'";
         // echo $sql3;
         $data3 = mysqli_query($conn,$sql3);
 
@@ -222,20 +222,20 @@ class Class_Barang
     {
         include("config.php");
 
-        $sql = "insert into tbl_keluarbarang values('".$no_pinjam."','".$kode_barang."','".$nama_barang."','".$tgl_pinjam."','".$nama_peminjam."','".$jumlah_pinjam."')";
+        $sql = "insert into keluarbarang values('".$no_pinjam."','".$kode_barang."','".$nama_barang."','".$tgl_pinjam."','".$nama_peminjam."','".$jumlah_pinjam."')";
         // echo $sql;
-        $data = mysqli_query($conn,$sql);
+        //$data = mysqli_query($conn,$sql);
 
-        $sql1 = "insert into tbl_pinjam values('".$no_pinjam."','".$tgl_pinjam."','".$kode_barang."','".$nama_barang."','".$jumlah_pinjam."','".$nama_peminjam."','".$keterangan."')";
+        $sql1 = "insert into barangkeluar values('".$no_pinjam."','".$tgl_pinjam."','".$kode_barang."','".$nama_barang."','".$jumlah_pinjam."','".$nama_peminjam."','".$keterangan."')";
         // echo $sql1;
         $data1 = mysqli_query($conn,$sql1);
 
-        $sql2 = "update tbl_barang set jumlah_brg='".$totalbarang."' where kode_barang='".$kode_barang."'";
+        $sql2 = "update barang set jumlah_brg='".$totalbarang."' where kode_barang='".$kode_barang."'";
         // echo $sql2;
 
         $data2 = mysqli_query($conn,$sql2);
 
-        $sql3 = "update tbl_stok set jml_barangkeluar='".$jmlbarangkeluar."' where kode_barang='".$kode_barang."'";
+        $sql3 = "update stok set jml_barangkeluar='".$jmlbarangkeluar."' where kode_barang='".$kode_barang."'";
         // echo $sql3;
 
         $data3 = mysqli_query($conn,$sql3);
@@ -253,17 +253,17 @@ class Class_Barang
     function update_datapeminjaman($jumlah_brg,$kode_barang,$keterangan,$no_pinjam,$stok)
     {
         include("config.php");
-        $sql1 = "update tbl_barang set jumlah_brg='".$jumlah_brg."' where kode_barang='".$kode_barang."'";
+        $sql1 = "update barang set jumlah_brg='".$jumlah_brg."' where kode_barang='".$kode_barang."'";
         // echo $sql1;
 
         $data1 = mysqli_query($conn,$sql1);
 
-        $sql2 = "update tbl_pinjam set keterangan='".$keterangan."' where nomor_pinjam='".$no_pinjam."'";
+        $sql2 = "update barangkeluar set keterangan='".$keterangan."' where nomor_pinjam='".$no_pinjam."'";
         // echo $sql2;
 
         $data2 = mysqli_query($conn,$sql2);
 
-        $sql3 = "update tbl_stok set jml_barangkeluar='".$stok."' where kode_barang='".$kode_barang."'";
+        $sql3 = "update stok set jml_barangkeluar='".$stok."' where kode_barang='".$kode_barang."'";
         // echo $sql3;
 
         $data3 = mysqli_query($conn,$sql3);
@@ -273,7 +273,7 @@ class Class_Barang
     {
         include("config.php");
 
-        $sql = "select * from tbl_barang where kode_barang='".$kode_barang."'";
+        $sql = "select * from barang where kode_barang='".$kode_barang."'";
 
         $data = mysqli_query($conn,$sql);
 
@@ -296,7 +296,7 @@ class Class_Barang
     {
         include("config.php");
 
-        $sql = "update tbl_barang a inner join tbl_stok e on a.kode_barang=e.kode_barang set 
+        $sql = "update barang a inner join stok e on a.kode_barang=e.kode_barang set 
         
         a.nama_barang='".$nama_barang."',
         e.nama_barang='".$nama_barang."',
@@ -320,19 +320,19 @@ class Class_Barang
     {
         include ("config.php");
 
-        $sql1 = "delete from tbl_barang where kode_barang='".$id."' ";
+        $sql1 = "delete from barang where kode_barang='".$id."' ";
         $data1 = mysqli_query($conn,$sql1);
 
-        $sql2 = "delete from tbl_stok where kode_barang= '".$id."' ";
+        $sql2 = "delete from stok where kode_barang= '".$id."' ";
         $data2 = mysqli_query($conn,$sql2);
 
-        $sql3 = "delete from tbl_pinjam where kode_barang= '".$id."' ";
+        $sql3 = "delete from barangkeluar where kode_barang= '".$id."' ";
         $data3 = mysqli_query($conn,$sql3);
 
-        $sql4 = "delete from tbl_masukbarang where kode_barang= '".$id."' ";
+        $sql4 = "delete from barangmasuk where kode_barang= '".$id."' ";
         $data4 = mysqli_query($conn,$sql4);
 
-        $sql5 = "delete from tbl_keluarbarang where kode_barang= '".$id."' ";
+        $sql5 = "delete from keluarbarang where kode_barang= '".$id."' ";
         $data5 = mysqli_query($conn,$sql5);
 
     }
