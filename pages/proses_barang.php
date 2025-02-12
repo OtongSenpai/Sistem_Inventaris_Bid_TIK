@@ -73,12 +73,12 @@ else if($aksi == "tambahbarangmasuk"){
 else if($aksi == "tambahdatapinjam"){
 
     $no_pinjam = $_POST["no_pinjam"];
-    $tgl_pinjam = $_POST["tgl_pinjam"];
+    $tgl_pinjam = date('Y-m-d');
     $nama_barang = $_POST["nama_barang"];
-    $tgl_kembali = $_POST["tgl_kembali"];
+    //$tgl_kembali = $_POST["tgl_kembali"];
     $jumlah_pinjam = $_POST["jumlah_pinjam"];
     $nama_peminjam = $_POST["nama_peminjam"];
-    $keterangan = $_POST["keterangan"];
+    $keterangan = "Sedang dipinjam";
 
 
     $kodebrg =  mysqli_query($conn,"select kode_barang, jumlah_brg from tbl_barang where nama_barang='".$nama_barang."'");
@@ -103,7 +103,7 @@ else if($aksi == "tambahdatapinjam"){
     }
     else{
         
-        $db->input_datapeminjaman($no_pinjam,$tgl_pinjam,$kode_barang,$nama_barang,$jumlah_pinjam,$nama_peminjam,$tgl_kembali,$keterangan,$totalbarang,$totbarangkeluar);
+        $db->input_datapeminjaman($no_pinjam,$tgl_pinjam,$kode_barang,$nama_barang,$jumlah_pinjam,$nama_peminjam,$keterangan,$totalbarang,$totbarangkeluar);
    
     echo "<script>alert('Data peminjaman tersimpan'); window.location.href='../index.php?page=peminjaman';</script>";
         

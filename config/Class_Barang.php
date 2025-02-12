@@ -218,7 +218,7 @@ class Class_Barang
 
     }
 
-    function input_datapeminjaman($no_pinjam,$tgl_pinjam,$kode_barang,$nama_barang,$jumlah_pinjam,$nama_peminjam,$tgl_kembali,$keterangan,$totalbarang,$jmlbarangkeluar)
+    function input_datapeminjaman($no_pinjam,$tgl_pinjam,$kode_barang,$nama_barang,$jumlah_pinjam,$nama_peminjam,$keterangan,$totalbarang,$jmlbarangkeluar)
     {
         include("config.php");
 
@@ -226,7 +226,7 @@ class Class_Barang
         // echo $sql;
         $data = mysqli_query($conn,$sql);
 
-        $sql1 = "insert into tbl_pinjam values('".$no_pinjam."','".$tgl_pinjam."','".$kode_barang."','".$nama_barang."','".$jumlah_pinjam."','".$nama_peminjam."','".$tgl_kembali."','".$keterangan."')";
+        $sql1 = "insert into tbl_pinjam values('".$no_pinjam."','".$tgl_pinjam."','".$kode_barang."','".$nama_barang."','".$jumlah_pinjam."','".$nama_peminjam."','".$keterangan."')";
         // echo $sql1;
         $data1 = mysqli_query($conn,$sql1);
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Jan 2025 pada 12.47
+-- Waktu pembuatan: 30 Jan 2025 pada 12.23
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 8.1.6
 
@@ -34,21 +34,18 @@ CREATE TABLE `tbl_barang` (
   `lokasi_barang` varchar(40) NOT NULL,
   `kategori` varchar(25) NOT NULL,
   `jumlah_brg` int(5) NOT NULL,
-  `kondisi` varchar(20) NOT NULL,
-  `jenis_brg` varchar(20) NOT NULL,
-  `sumber_dana` varchar(250) NOT NULL
+  `jenis_brg` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tbl_barang`
 --
 
-INSERT INTO `tbl_barang` (`kode_barang`, `nama_barang`, `spesifikasi`, `lokasi_barang`, `kategori`, `jumlah_brg`, `kondisi`, `jenis_brg`, `sumber_dana`) VALUES
-('B001', 'Office OP3 i3 4GB', '- MB Intel LGA 1156 Socket H55/H61\r\n- Prosesor Intel Core i3 550/i3 2120/i3 3240 2.9Ghz 2C/4MB\r\n- VGA OnBoard Intel HD 2500\r\n- RAM 4 GB\r\n- System Storage SSD 120GB\r\n- Chasis. SPC/Futura/PowerUp/Sejenis (Inc PSU upto 450w)', 'Gudang', 'PC', 2, 'Baru', 'PC', 'Bid TIK'),
-('B002', 'SPC SM-19HD', 'Office 19 inch / black\r\nRespon time 3ms\r\ninput : HDMI / VGA\r\n1440 h X 900 v / HD Clear display\r\nLED display\r\n60HZ high refresh / 1.98kg', 'Gudang', 'Monitor', 9, 'Baru', 'Monitor', 'Bid TIK'),
-('B003', 'Robot M102', 'DPI : 1200\r\nPolling rating : 125Hz\r\nSwitch rating : 2 million clicks\r\nInterface : USB\r\nButton : 3\r\nSize : 99.8*60.5*32mm\r\nWired length :1.5M\r\nWeight : 45.5g', 'Gudang', 'Mouse', 10, 'Baru', 'Mouse', 'Bid TIK'),
-('B004', 'K09-Wired', 'Warna: Hitam\r\nBahan: ABS\r\nPort type: USB\r\nPanjang garis: 1.3meter\r\n?Jumlah kunci: 104 keys\r\nConnection method: USB cable plug and play\r\nApakah tahan air: Tahan air\r\nBerat: 376g\r\nUkuran: 436*131*25mm', 'Gudang', 'Keyboard', 4, 'Baru', 'Keyboard', 'Bid TIK'),
-('B005', 'Office OP3 i3 6GB', '', 'd', 'PC', 0, 'Baru', 'd', 'd');
+INSERT INTO `tbl_barang` (`kode_barang`, `nama_barang`, `spesifikasi`, `lokasi_barang`, `kategori`, `jumlah_brg`, `jenis_brg`) VALUES
+('B001', 'Office OP3 i3 4GB', '- MB Intel LGA 1156 Socket H55/H61\r\n- Prosesor Intel Core i3 550/i3 2120/i3 3240 2.9Ghz 2C/4MB\r\n- VGA OnBoard Intel HD 2500\r\n- RAM 4 GB\r\n- System Storage SSD 120GB\r\n- Chasis. SPC/Futura/PowerUp/Sejenis (Inc PSU upto 450w)', 'Gudang', 'PC', 21, 'PC'),
+('B002', 'SPC SM-19HD', 'Office 19 inch / black\r\nRespon time 3ms\r\ninput : HDMI / VGA\r\n1440 h X 900 v / HD Clear display\r\nLED display\r\n60HZ high refresh / 1.98kg', 'Gudang', 'Monitor', 9, 'Monitor'),
+('B003', 'Robot M102', 'DPI : 1200\r\nPolling rating : 125Hz\r\nSwitch rating : 2 million clicks\r\nInterface : USB\r\nButton : 3\r\nSize : 99.8*60.5*32mm\r\nWired length :1.5M\r\nWeight : 45.5g', 'Gudang', 'Mouse', 10, 'Mouse'),
+('B004', 'K09-Wired', 'Warna: Hitam\r\nBahan: ABS\r\nPort type: USB\r\nPanjang garis: 1.3meter\r\n?Jumlah kunci: 104 keys\r\nConnection method: USB cable plug and play\r\nApakah tahan air: Tahan air\r\nBerat: 376g\r\nUkuran: 436*131*25mm', 'Gudang', 'Keyboard', 12, 'Keyboard');
 
 -- --------------------------------------------------------
 
@@ -87,7 +84,7 @@ CREATE TABLE `tbl_masukbarang` (
   `id_masukbarang` varchar(11) NOT NULL,
   `kode_barang` varchar(8) NOT NULL,
   `nama_barang` varchar(30) NOT NULL,
-  `tgl_masuk` date NOT NULL,
+  `tgl_masuk` date NOT NULL DEFAULT current_timestamp(),
   `jumlah_masuk` int(8) NOT NULL,
   `kode_supplier` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -101,7 +98,8 @@ INSERT INTO `tbl_masukbarang` (`id_masukbarang`, `kode_barang`, `nama_barang`, `
 ('BMSK002', 'B001', 'Office OP3 i3 4GB', '2024-12-04', 3, 'SP001'),
 ('BMSK003', 'B002', 'SPC SM-19HD', '2024-12-04', 11, 'SP001'),
 ('BMSK004', 'B003', 'Robot M102', '2024-12-11', 10, 'SP002'),
-('BMSK005', 'B004', 'K09-Wired', '2024-12-16', 7, 'SP004');
+('BMSK005', 'B004', 'K09-Wired', '2024-12-16', 7, 'SP004'),
+('BMSK010', 'B004', 'K09-Wired', '2025-01-29', 4, 'SP002');
 
 -- --------------------------------------------------------
 
@@ -116,7 +114,6 @@ CREATE TABLE `tbl_pinjam` (
   `nama_barang` varchar(30) NOT NULL,
   `jumlah_pinjam` int(7) NOT NULL,
   `peminjam` varchar(35) NOT NULL,
-  `tgl_kembali` date NOT NULL,
   `keterangan` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -124,13 +121,13 @@ CREATE TABLE `tbl_pinjam` (
 -- Dumping data untuk tabel `tbl_pinjam`
 --
 
-INSERT INTO `tbl_pinjam` (`nomor_pinjam`, `tgl_pinjam`, `kode_barang`, `nama_barang`, `jumlah_pinjam`, `peminjam`, `tgl_kembali`, `keterangan`) VALUES
-('PMJN001', '2024-12-01', 'B001', 'Office OP3 i3 4GB', 1, 'Kaur Bidkeu', '2024-12-02', 'Sudah dikembalikan'),
-('PMJN002', '2024-12-04', 'B002', 'SPC SM-19HD', 1, 'Kaur Bidkeu', '2024-12-11', 'Sedang dipinjam'),
-('PMJN003', '2024-12-17', 'B003', 'Robot M102', 3, 'Kaur Bidkeu', '2024-12-31', 'Sudah dikembalikan'),
-('PMJN004', '2024-12-17', 'B004', 'K09-Wired', 3, 'Kaur Bidkeu', '2024-12-31', 'Sedang dipinjam'),
-('PMJN005', '2024-12-17', 'B001', 'Office OP3 i3 4GB', 3, 'Kaur Bidkeu', '2024-12-31', 'Sedang dipinjam'),
-('PMJN006', '2025-01-09', 'B002', 'SPC SM-19HD', 1, 'humas', '2025-01-09', 'Sedang dipinjam');
+INSERT INTO `tbl_pinjam` (`nomor_pinjam`, `tgl_pinjam`, `kode_barang`, `nama_barang`, `jumlah_pinjam`, `peminjam`, `keterangan`) VALUES
+('PMJN001', '2024-12-01', 'B001', 'Office OP3 i3 4GB', 1, 'Kaur Bidkeu', 'Sudah dikembalikan'),
+('PMJN002', '2024-12-04', 'B002', 'SPC SM-19HD', 1, 'Kaur Bidkeu', 'Sedang dipinjam'),
+('PMJN003', '2024-12-17', 'B003', 'Robot M102', 3, 'Kaur Bidkeu', 'Sudah dikembalikan'),
+('PMJN004', '2024-12-17', 'B004', 'K09-Wired', 3, 'Kaur Bidkeu', 'Sedang dipinjam'),
+('PMJN005', '2024-12-17', 'B001', 'Office OP3 i3 4GB', 3, 'Kaur Bidkeu', 'Sedang dipinjam'),
+('PMJN006', '2025-01-09', 'B002', 'SPC SM-19HD', 1, 'humas', 'Sedang dipinjam');
 
 -- --------------------------------------------------------
 
@@ -143,20 +140,18 @@ CREATE TABLE `tbl_stok` (
   `nama_barang` varchar(30) NOT NULL,
   `jml_barangmasuk` int(7) NOT NULL,
   `jml_barangkeluar` int(7) NOT NULL,
-  `total_barang` int(8) NOT NULL,
-  `keterangan` varchar(25) NOT NULL
+  `total_barang` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tbl_stok`
 --
 
-INSERT INTO `tbl_stok` (`kode_barang`, `nama_barang`, `jml_barangmasuk`, `jml_barangkeluar`, `total_barang`, `keterangan`) VALUES
-('B001', 'Office OP3 i3 4GB', 5, 3, 5, ''),
-('B002', 'SPC SM-19HD', 11, 2, 11, ''),
-('B003', 'Robot M102', 10, 0, 10, ''),
-('B004', 'K09-Wired', 7, 3, 7, ''),
-('B005', 'Office OP3 i3 6GB', 0, 0, 0, '');
+INSERT INTO `tbl_stok` (`kode_barang`, `nama_barang`, `jml_barangmasuk`, `jml_barangkeluar`, `total_barang`) VALUES
+('B001', 'Office OP3 i3 4GB', 24, 3, 24),
+('B002', 'SPC SM-19HD', 11, 2, 11),
+('B003', 'Robot M102', 10, 0, 10),
+('B004', 'K09-Wired', 15, 3, 15);
 
 -- --------------------------------------------------------
 
@@ -265,7 +260,7 @@ ALTER TABLE `tbl_pinjam`
 -- Ketidakleluasaan untuk tabel `tbl_stok`
 --
 ALTER TABLE `tbl_stok`
-  ADD CONSTRAINT `fk_stok_barang` FOREIGN KEY (`kode_barang`) REFERENCES `tbl_barang` (`kode_barang`);
+  ADD CONSTRAINT `fk_stok_barang` FOREIGN KEY (`kode_barang`) REFERENCES `tbl_barang` (`kode_barang`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

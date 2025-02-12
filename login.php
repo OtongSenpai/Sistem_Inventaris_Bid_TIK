@@ -48,12 +48,17 @@ if (isset($_SESSION["username"])) {
                         <?php 
 
                             if (isset($_POST["submit"])) {
+                                if (strlen($username) == 0) {
+                                    echo "<div class='label label-danger'> Tolong masukkan username!</div>";
+                                } 
+                                if (strlen($password) == 0) {
+                                    echo "<div class='label label-danger'> Tolong masukkan password!</div>";
+                                }
 
                                 if (strlen($username) != 0 && strlen($password) != 0 && !$db->login($username,$password)) {
                                     echo "<div class='label label-danger'> username atau password salah! </div>";
                                 }
                                 else{
-
                                     $db->login($_POST["username"],$_POST["password"]);
                                 }
                             }
